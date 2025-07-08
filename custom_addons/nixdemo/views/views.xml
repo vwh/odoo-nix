@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="nixdemo.list">
+      <field name="name">nixdemo list</field>
+      <field name="model">nixdemo.nixdemo</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="nixdemo.action_window">
+      <field name="name">nixdemo window</field>
+      <field name="res_model">nixdemo.nixdemo</field>
+      <field name="view_mode">list,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="nixdemo.action_server">
+      <field name="name">nixdemo server</field>
+      <field name="model_id" ref="model_nixdemo_nixdemo"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="nixdemo" id="nixdemo.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="nixdemo.menu_1" parent="nixdemo.menu_root"/>
+    <menuitem name="Menu 2" id="nixdemo.menu_2" parent="nixdemo.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="nixdemo.menu_1_list" parent="nixdemo.menu_1"
+              action="nixdemo.action_window"/>
+    <menuitem name="Server to list" id="nixdemo" parent="nixdemo.menu_2"
+              action="nixdemo.action_server"/>
+-->
+  </data>
+</odoo>

@@ -32,6 +32,8 @@
             sassc # Odoo SCSS compilation
             libsass
             
+            just # Command runner
+            
             # System libs
             libxml2
             libxslt
