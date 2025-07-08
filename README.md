@@ -8,6 +8,10 @@ This repository provides a Nix flake-based development environment for Odoo 18, 
 
 It is assumed you have already cloned the Odoo 18 source code into the `odoo/` directory.
 
+```
+git clone -b 18 https://github.com/odoo/odoo.git
+```
+
 ### 2. Set Up the Nix Environment
 
 This project uses a Nix flake to provide a reproducible development environment. It includes:
