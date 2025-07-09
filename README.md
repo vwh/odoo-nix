@@ -71,13 +71,21 @@ Here's a typical development flow when working with Odoo:
 
 This project uses `just` to simplify common Odoo development commands. Make sure you are in the `nix develop` shell before running these commands.
 
+### Core Development
+
+- **Initialize the database (first time only):**
+  ```bash
+  just init
+  ```
+  This command prepares the database for the first time by creating it and installing the `base` module.
+
 - **Start the Odoo server:**
   ```bash
   just run
   ```
-  You can pass additional `odoo-bin` arguments:
+  You can pass additional `odoo-bin` arguments directly:
   ```bash
-  just run --xmlrpc-port=8070
+  just run --xmlrpc-port=8070 --log-level=debug
   ```
 
 - **Update Odoo modules:**
@@ -109,6 +117,32 @@ This project uses `just` to simplify common Odoo development commands. Make sure
   just scaffold my_new_module
   ```
   This will create the basic module structure in `custom_addons/my_new_module`.
+
+### Database Management
+
+- **Reset the database:**
+  ```bash
+  just reset
+  ```
+  This will completely wipe the database and re-initialize it. Use with caution.
+
+- **Check database status:**
+  ```bash
+  just status
+  ```
+  This shows if the database exists and lists some of its tables.
+
+- **Restart the PostgreSQL server:**
+  ```bash
+  just db-restart
+  ```
+  This restarts the PostgreSQL instance managed by the Nix shell.
+
+- **Kill database connections:**
+  ```bash
+  just db-kill
+  ```
+  This forcibly terminates all active connections to the Odoo database, which can be useful if the server is stuck.
 
 ### Access the Application
 
