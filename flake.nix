@@ -11,7 +11,9 @@
       let
         pkgs = import nixpkgs { inherit system; };
         python = pkgs.python312;
-        pyPackages = pkgs.python312Packages;
+        pyPkgs = pkgs.python312Packages;
+        nodejs = pkgs.nodejs_22;
+        nodePkgs = pkgs.nodePackages;
       in
       {
         devShells.default = pkgs.mkShell {
@@ -19,28 +21,36 @@
           venvDir = "./.venv";
 
           buildInputs = with pkgs; [
+            # Python environment
             python
-            pyPackages.venvShellHook
-            pyPackages.psycopg2 # Python PostgreSQL connector
-            pyPackages.inotify # Odoo filesystem watcher
+            pyPkgs.venvShellHook
+            pyPkgs.psycopg2 # Python PostgreSQL connector
+            pyPkgs.inotify # Odoo filesystem watcher
 
+            # Node.js environment
+            nodejs
+            nodePkgs.less #  Odoo frontend asset compilation
+            nodePkgs.rtlcss # Odoo frontend asset compilation
+
+            # Database
             postgresql_16
 
-            nodejs
-            nodejs.pkgs.less #  Odoo frontend asset compilation
-            nodejs.pkgs.rtlcss # Odoo frontend asset compilation
-
+            # Build tools
             sassc # Odoo SCSS compilation
             libsass
             
+            # Development tools
             just # Command runner
             
-            # System libs
+            # System libraries
             libxml2
             libxslt
             libjpeg
+            libpng
             zlib 
-
+            freetype
+            wkhtmltopdf
+            
             # Fonts
             dejavu_fonts
             freefont_ttf
