@@ -22,6 +22,7 @@
             python
             pyPackages.venvShellHook
             pyPackages.psycopg2 # Python PostgreSQL connector
+            pyPackages.inotify # Odoo filesystem watcher
 
             postgresql_16
 
