@@ -36,27 +36,28 @@ reset:
 run:
     @echo "Starting Odoo server with extra args: $@"
     "{{ODOO_BIN}}" \
+      --addons-path="{{ADDONS_PATH}}" \
       -d "{{DB_NAME}}" \
       --dev=all \
       "$@"
 
 update modules:
 	@echo "Updating Odoo modules: {{modules}}..."
-	"{{ODOO_BIN}}" -d "{{DB_NAME}}" -u "{{modules}}" --stop-after-init
+	"{{ODOO_BIN}}" --addons-path="{{ADDONS_PATH}}" -d "{{DB_NAME}}" -u "{{modules}}" --stop-after-init
 	@echo "Modules updated. Restart Odoo server to apply changes."
 
 install modules:
 	@echo "Installing Odoo modules: {{modules}}..."
-	"{{ODOO_BIN}}" -d "{{DB_NAME}}" -i "{{modules}}" --stop-after-init
+	"{{ODOO_BIN}}" --addons-path="{{ADDONS_PATH}}" -d "{{DB_NAME}}" -i "{{modules}}" --stop-after-init
 	@echo "Modules installed. Restart Odoo server to apply changes."
 
 shell:
     @echo "Launching Odoo shell..."
-    "{{ODOO_BIN}}" shell -d "{{DB_NAME}}"
+    "{{ODOO_BIN}}" shell --addons-path="{{ADDONS_PATH}}" -d "{{DB_NAME}}"
 
 test modules:
 	@echo "Running tests for Odoo modules: {{modules}}..."
-	"{{ODOO_BIN}}" -d "{{DB_NAME}}" -u "{{modules}}" --test-enable --stop-after-init
+	"{{ODOO_BIN}}" --addons-path="{{ADDONS_PATH}}" -d "{{DB_NAME}}" -u "{{modules}}" --test-enable --stop-after-init
 	@echo "Tests completed."
 
 scaffold module_name:
