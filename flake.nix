@@ -50,6 +50,8 @@
             zlib 
             freetype
             wkhtmltopdf
+            openldap
+            cyrus_sasl
             
             # Fonts
             dejavu_fonts
@@ -63,11 +65,23 @@
 
           postVenvCreation = ''
             unset SOURCE_DATE_EPOCH
+            # Set environment variables for C extension builds
+            export LDAP_INCLUDES="${pkgs.openldap.dev}/include"
+            export LDAP_LIBS="${pkgs.openldap.out}/lib"
+            export SASL_INCLUDES="${pkgs.cyrus_sasl.dev}/include"
+            export SASL_LIBS="${pkgs.cyrus_sasl.out}/lib"
+            
             pip install -r odoo-requirements.txt
           '';
 
           postShellHook = ''
             unset SOURCE_DATE_EPOCH
+            
+            # Set environment variables for C extension builds (in case they're needed later)
+            export LDAP_INCLUDES="${pkgs.openldap.dev}/include"
+            export LDAP_LIBS="${pkgs.openldap.out}/lib"
+            export SASL_INCLUDES="${pkgs.cyrus_sasl.dev}/include"
+            export SASL_LIBS="${pkgs.cyrus_sasl.out}/lib"
             
             # PostgreSQL setup
             export PGDATA=$PWD/.pgdata
@@ -98,7 +112,6 @@
             fi
 
             export PGDATABASE=odoo-dev
-
             echo "Python venv: $(which python)"
             echo "PostgreSQL: $PGHOST:$PGPORT"
           '';
